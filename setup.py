@@ -4,7 +4,6 @@ import os
 import re
 import sys
 from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
 
 __version__ = ''
 with open('threads/__version__.py', 'r') as fd:
@@ -16,17 +15,6 @@ with open('threads/__version__.py', 'r') as fd:
             break
 
 
-class PyTest(TestCommand):
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.test_args)
-        sys.exit(errno)
 
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
@@ -34,9 +22,9 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     readme = f.read()
 
 setup(
-    name='lotify',
+    name='threads-sdk',
     version=__version__,
-    description='Using LINE Notify more easily',
+    description='Using Threads API more easily',
     url='https://github.com/louis70109/threads-sdk',
     author='NiJia Lin',
     author_email='louis70109@gmail.com',
@@ -48,7 +36,6 @@ setup(
     license='MIT',
     packages=find_packages(exclude=['tests']),
     install_requires=["requests>=2.0"],
-    cmdclass={'test': PyTest},
     python_requires='!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
     project_urls={
         'Bug Reports': 'https://github.com/louis70109/lotify/issues',

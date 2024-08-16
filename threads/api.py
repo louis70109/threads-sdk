@@ -127,13 +127,14 @@ class ThreadsAPI:
             "text": text,
             "access_token": self.access_token,
             "media_type": media_type,  # TEXT, IMAGE, VIDEO
-            "is_carousel_item": is_carousel_item,
         }
 
         if media_type == "IMAGE" and image_url is not None:
             params["image_url"] = image_url
         elif media_type == "VIDEO" and video_url is not None:
             params["video_url"] = video_url
+        elif is_carousel_item:
+            params["is_carousel_item"] = is_carousel_item
 
         resp = requests.post(
             f"{self.api_url}/{self.user_id}/threads",

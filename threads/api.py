@@ -33,17 +33,17 @@ class ThreadsAPI:
             "name",
         ]
 
-        res = requests.get(
+        resp = requests.get(
             f"{self.api_url}/me",
             params={
                 "fields": ",".join(user_bio_list),
                 "access_token": self.access_token,
             },
         )
-        return res.json()
+        return resp.json()
 
     def get_long_live_access_token(self):
-        res = requests.get(
+        resp = requests.get(
             f"{self.api_url}/access_token",
             params={
                 "grant_type": "th_exchange_token",
@@ -52,7 +52,7 @@ class ThreadsAPI:
             },
         )
         # Developer needs to change environment ACCESS_TOKEN variable
-        return res.json()
+        return resp.json()
 
     def get_threads_insights_by_id(self, thread_id: str) -> dict:
         print(f"insights for thread: {thread_id}...")
@@ -68,8 +68,6 @@ class ThreadsAPI:
 
         if resp.status_code != 200:
             raise Exception(resp.json())
-
-        # re-gen data metrics
 
         metric_dict = {}
 
@@ -116,6 +114,68 @@ class ThreadsAPI:
         df = pd.DataFrame.from_dict(resp.json().get("data", []))
 
         return df
+
+    def create_media_container(
+        self,
+        text: str = None,
+        media_type: str = "TEXT",
+        image_url: str = None,
+        video_url: str = None,
+        is_carousel_item: bool = False,
+    ) -> dict:
+        params = {
+            "text": text,
+            "access_token": self.access_token,
+            "media_type": media_type,  # TEXT, IMAGE, VIDEO
+            "is_carousel_item": is_carousel_item,
+        }
+
+        if media_type == "IMAGE" and image_url is not None:
+            params["image_url"] = image_url
+        elif media_type == "VIDEO" and video_url is not None:
+            params["video_url"] = video_url
+
+        resp = requests.post(
+            f"{self.api_url}/{self.user_id}/threads",
+            params=params,
+        )
+
+        if resp.status_code != 200:
+            raise Exception(resp.json())
+
+        return resp.json()
+
+    def publish_container(self, media_id: str) -> dict:
+        resp = requests.post(
+            f"{self.api_url}/{self.user_id}/threads_publish",
+            params={
+                "creation_id": media_id,
+                "access_token": self.access_token,
+            },
+        )
+
+        if resp.status_code != 200:
+            raise Exception(resp.json())
+
+        return resp.json()
+
+    def create_carousel_container(self, media_list: list, text: str = None) -> dict:
+        # curl -i -X POST "https://graph.threads.net/v1.0/<THREADS_USER_ID>/threads?media_type=CAROUSEL&children=<MEDIA_ID_1>,<MEDIA_ID_2>,<MEDIA_ID_3>&access_token=<ACCESS_TOKEN>"
+        media_id_list = ",".join(media_list)
+        resp = requests.post(
+            f"{self.api_url}/{self.user_id}/threads",
+            params={
+                "media_type": "CAROUSEL",
+                "children": media_id_list,
+                "access_token": self.access_token,
+                "text": text,
+            },
+        )
+
+        if resp.status_code != 200:
+            raise Exception(resp.json())
+
+        return resp.json()
 
     def arrange_insight_table(self) -> pd.DataFrame:
         INSIGHT_METRIC_LIST = [

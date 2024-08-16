@@ -34,7 +34,7 @@ class ThreadsAPI:
         ]
 
         res = requests.get(
-            self.api_url + "/me",
+            f"{self.api_url}/me",
             params={
                 "fields": ",".join(user_bio_list),
                 "access_token": self.access_token,
@@ -44,7 +44,7 @@ class ThreadsAPI:
 
     def get_long_live_access_token(self):
         res = requests.get(
-            self.api_url + "/access_token",
+            f"{self.api_url}/access_token",
             params={
                 "grant_type": "th_exchange_token",
                 "client_secret": self.app_secret,
@@ -96,15 +96,12 @@ class ThreadsAPI:
 
         return df
 
-    def get_threads_df(
-        self,
-        user_id: str,
-    ) -> pd.DataFrame:
+    def get_threads_df(self) -> pd.DataFrame:
         # set up params
         start_date_dt = datetime.now() - timedelta(days=self.backfill_date_interval)
 
         resp = requests.get(
-            f"{self.api_url}/{user_id}/threads",
+            f"{self.api_url}/{self.user_id}/threads",
             params={
                 "fields": "id,permalink,username,timestamp,text",
                 "since": str(start_date_dt.isoformat()),

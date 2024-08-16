@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-import sys
 from setuptools import setup, find_packages
 
 __version__ = ''
@@ -38,7 +37,7 @@ setup(
     install_requires=["requests>=2.0"],
     python_requires='!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
     project_urls={
-        'Bug Reports': 'https://github.com/louis70109/lotify/issues',
+        'Bug Reports': 'https://github.com/louis70109/threads-sdk/issues',
         'Source': 'https://github.com/louis70109/threads-sdk',
     },
     classifiers=[

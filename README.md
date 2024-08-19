@@ -1,11 +1,11 @@
 # Threads SDK
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/louis70109/line-notify#contributing)
-[![pypi package](https://badge.fury.io/py/lotify.svg)](https://badge.fury.io/py/lotify)
-[![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.5-blue.svg)](https://badge.fury.io/py/lotify)
-[![GitHub latest commit](https://badgen.net/github/last-commit/Naereen/Strapdown.js)](https://GitHub.com/Naereen/StrapDown.js/commit/)
-[![GitHub stars](https://img.shields.io/github/stars/Naereen/StrapDown.js.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/Naereen/StrapDown.js/stargazers/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com//louis70109/threads-sdk#contributing)
+[![pypi package](https://badge.fury.io/py/threads-sdk.svg)](https://badge.fury.io/py/threads-sdk)
+[![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.5-blue.svg)](https://badge.fury.io/py/threads-sdk)
+[![GitHub latest commit](https://badgen.net/github/last-commit/louis70109/threads-sdk)](https://GitHub.com/louis70109/threads-sdk/)
+[![GitHub stars](https://img.shields.io/github/stars/louis70109/threads-sdk.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/louis70109/threads-sdk/stargazers/)
 
 
 # Usage
